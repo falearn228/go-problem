@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"math/rand"
 	"sort"
 	"sync"
@@ -35,10 +34,7 @@ func main() {
 		for left <= right {
 			middle := left + (right-left)/2
 			if copya[middle] == expected {
-				col, err := simpleSearch(a[i])
-				if err != nil {
-					log.Fatal("failed...")
-				}
+				col := simpleSearch(a[i])
 				wg.Add(1)
 				go zeroRowCol(a, i, col, mu, wg, startch)
 			}
@@ -54,13 +50,15 @@ func main() {
 	printMatrix(a)
 }
 
-func simpleSearch(a []int) (int, error) {
+func simpleSearch(a []int) int {
+	result := 0
 	for i := range a {
 		if a[i] == 0 {
-			return i, nil
+			result = i
+			break
 		}
 	}
-	return -1, fmt.Errorf("can't find expected value")
+	return result
 }
 
 func zeroRowCol(a [][]int, row, col int, mu *sync.Mutex, wg *sync.WaitGroup, startch <-chan struct{}) {
