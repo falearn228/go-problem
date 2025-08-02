@@ -9,10 +9,8 @@ func productExceptSelf(nums []int) []int {
 		}
 	}
 
-	//sufx[i] = sufx[i+1] * nums[i+1]
 	i := n - 2
 	sufx := nums[n-1]
-	fmt.Println(answer)
 	for i >= 0 {
 		answer[i] *= sufx
 		sufx = sufx * nums[i]
