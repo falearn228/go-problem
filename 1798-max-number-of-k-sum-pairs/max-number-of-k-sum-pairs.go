@@ -1,21 +1,19 @@
 func maxOperations(nums []int, k int) int {
-    freq := make(map[int]int)
-    operations := 0
+    kSet := make(map[int]int)
+    opers := 0
 
-    
-    for _, num := range nums {
-        complement := k - num
-        
-        // Проверяем, есть ли для нас пара в карте
-        if freq[complement] > 0 {
-            // Нашли!
-            operations++
-            // Уменьшаем счетчик пары, так как мы ее "использовали"
-            freq[complement]--
-        } else {
-            // Пары нет, добавляем себя в карту в ожидании своей пары
-            freq[num]++
+    for _, v := range nums {
+        diff := k - v
+        val := kSet[diff]
+        if val <= 0  {
+            kSet[v]++
+            continue
         }
+
+        kSet[diff]--
+        opers++
+
+        
     }
-    return operations
+    return opers
 }
