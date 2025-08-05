@@ -1,19 +1,19 @@
 func maxOperations(nums []int, k int) int {
-    kSet := make(map[int]int)
+    sort.Ints(nums) // o n log n
     opers := 0
+    n := len(nums)
+    i, j := 0, n-1
 
-    for _, v := range nums {
-        diff := k - v
-        val := kSet[diff]
-        if val <= 0  {
-            kSet[v]++
-            continue
+    for i < j {
+        if nums[i] + nums[j] < k {
+            i++
+        } else if nums[i] + nums[j] > k {
+            j--
+        } else {
+            opers++
+            i++
+            j--
         }
-
-        kSet[diff]--
-        opers++
-
-        
     }
     return opers
 }
