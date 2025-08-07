@@ -14,14 +14,6 @@ func closeStrings(word1 string, word2 string) bool {
             return false
         }
     }
-    if len(freqMap1) != len(freqMap2) {
-        return false
-    }
-    for char := range freqMap1 {
-        if _, ok := freqMap2[char]; !ok {
-            return false
-        }
-    }
 
     freq1 := make([]int, len(freqMap1))
     ind := 0
