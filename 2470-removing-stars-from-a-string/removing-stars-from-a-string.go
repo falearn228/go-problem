@@ -9,11 +9,5 @@ func removeStars(s string) string {
         }
     }
 
-    var sb strings.Builder
-    sb.Grow(len(stack))
-    for i := range stack {
-        sb.WriteByte(stack[i])
-    }
-
-    return sb.String()
+    return string(stack)
 }
