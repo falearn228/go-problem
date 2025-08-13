@@ -1,25 +1,15 @@
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
 func oddEvenList(head *ListNode) *ListNode {
-    if head == nil || head.Next == nil {
+	if head == nil || head.Next == nil {
         return head
     }
-    
-    odd := head
-    even := head.Next
-    evenNode := even
-
-    for even != nil && even.Next != nil {
-        odd.Next = even.Next
-        odd = odd.Next
-        even.Next = odd.Next
-        even = even.Next
-    }
-    odd.Next = evenNode
-    return head
+	startOdd, startEven := head, head.Next
+	endOdd, endEven := head, head.Next
+	for endOdd != nil && endOdd.Next != nil && endEven != nil && endEven.Next != nil {
+		endOdd.Next = endEven.Next
+        endOdd = endOdd.Next
+        endEven.Next = endOdd.Next
+        endEven = endEven.Next
+	}
+	endOdd.Next = startEven
+	return startOdd
 }
