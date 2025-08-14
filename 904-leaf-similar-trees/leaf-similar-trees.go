@@ -16,17 +16,22 @@ func leafSimilar(root1 *TreeNode, root2 *TreeNode) bool {
 
 func collectLeaves(node *TreeNode) []int {
     res := []int{}
+    stack := []*TreeNode{node}
     var dfs func(n *TreeNode)
     dfs = func(n *TreeNode) {
-        if n == nil {
-            return
+        for len(stack) > 0 {
+            n := stack[len(stack)-1]
+            stack = stack[:len(stack)-1]
+            if n == nil {
+                continue
+            }
+            if n.Left == nil && n.Right == nil {
+                res = append(res, n.Val)
+                continue
+            }
+            stack = append(stack, n.Left)
+            stack = append(stack, n.Right)
         }
-        if n.Left == nil && n.Right == nil {
-            res = append(res, n.Val)
-            return
-        }
-        dfs(n.Left)
-        dfs(n.Right)
     }
     dfs(node)
     return res
