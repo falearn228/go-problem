@@ -15,8 +15,8 @@ func pathSum(root *TreeNode, targetSum int) int {
         if node == nil {
             return
         }
-        newNeed := need - node.Val
-        if newNeed == 0 {
+        newNeed := need + node.Val
+        if newNeed == targetSum {
             count++
         }
         
@@ -29,7 +29,7 @@ func pathSum(root *TreeNode, targetSum int) int {
         if node == nil {
             return
         }
-        dfs(node, targetSum)
+        dfs(node, 0)
         walkStarts(node.Left)
         walkStarts(node.Right)
         return
