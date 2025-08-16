@@ -10,30 +10,26 @@
 // if sumNodes > targetSum -> switch root (after left, right)
 func pathSum(root *TreeNode, targetSum int) int {
     count := 0
-    var dfs func(node *TreeNode, need int) 
-    dfs = func(node *TreeNode, need int) {
+    freq := make(map[int]int)
+    freq[0] = 1
+    prefSum := make([]int, 1)
+    var dfs func(node *TreeNode, prefSum []int)
+    dfs = func(node *TreeNode, prefSum []int) {
         if node == nil {
             return
         }
-        newNeed := need + node.Val
-        if newNeed == targetSum {
-            count++
-        }
-        
-        dfs(node.Left, newNeed)
-        dfs(node.Right, newNeed)
+
+        prefSum = append(prefSum, prefSum[len(prefSum)-1] + node.Val)
+        prefA := prefSum[len(prefSum)-1] - targetSum
+        prefB := prefSum[len(prefSum)-1]
+        if freq[prefA] > 0 {
+            count += freq[prefA]
+        } 
+        freq[prefB]++
+        dfs(node.Left, prefSum)
+        dfs(node.Right, prefSum)
+        freq[prefB]--
     }
-   
-    var walkStarts func(node *TreeNode)
-    walkStarts = func(node *TreeNode) {
-        if node == nil {
-            return
-        }
-        dfs(node, 0)
-        walkStarts(node.Left)
-        walkStarts(node.Right)
-        return
-    }
-    walkStarts(root)
+    dfs(root, prefSum)
     return count
 }
