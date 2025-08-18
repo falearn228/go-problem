@@ -6,6 +6,10 @@
  *     Right *TreeNode
  * }
  */
+func init() {
+	debug.SetMemoryLimit(1)
+}
+
 func searchBST(root *TreeNode, val int) *TreeNode {
     var dfs func(*TreeNode) *TreeNode
     dfs = func(n *TreeNode) *TreeNode {
