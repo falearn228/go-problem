@@ -35,17 +35,10 @@ func orangesRotting(grid [][]int) int {
         lenQ := len(queue)
 
         rottenInThisMin := false
-        // if rottenInThisMin == false {
-        //     break
-        // }
 
         for i := 0; i < lenQ; i++ {
             cell := queue[0]
             queue = queue[1:]
-
-            if grid[cell[0]][cell[1]] == 0 {
-                continue
-            }
 
             for _, move := range moves {
                 rowCell, colCell := cell[0] + move[0], cell[1] + move[1]
