@@ -4,17 +4,14 @@ type Trie struct {
 }
 
 func Constructor() Trie {
-	return Trie{
-		child: [26]*Trie{},
-	}
+	return Trie{}
 }
 
 func (this *Trie) Insert(word string) {
 	current := this
 	for i := range word {
 		if current.child[word[i]-'a'] == nil {
-			newNode := Constructor()
-			current.child[word[i]-'a'] = &newNode
+			current.child[word[i]-'a'] = &Trie{}
 		}
 		current = current.child[word[i]-'a']
 	}
@@ -42,6 +39,7 @@ func (this *Trie) StartsWith(prefix string) bool {
 	}
 	return true
 }
+
 
 
 /**
