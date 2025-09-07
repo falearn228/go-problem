@@ -4,14 +4,13 @@ func removeDuplicates(nums []int) int {
         return 1
     }
 
-    left, right := 1, 1
+    right := 1
 
-    for left < n {
+    for left := 1; left < n; left++ {
         if nums[left] != nums[left-1] {
             nums[right] = nums[left]
             right++
         } 
-        left++
     }
 
     return right
