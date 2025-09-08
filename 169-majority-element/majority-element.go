@@ -3,6 +3,20 @@ func majorityElement(nums []int) int {
     if n == 1 {
         return nums[0]
     }
-    sort.Ints(nums)
-    return nums[n / 2]
+    
+    candidate := 0
+    count := 0
+
+    for i := range nums {
+        if count == 0 {
+            candidate = nums[i]
+        }
+        if nums[i] == candidate {
+            count++
+        } else if nums[i] != candidate {
+            count--
+        }
+    }
+
+    return candidate
 }
