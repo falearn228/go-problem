@@ -4,12 +4,20 @@ func rotate(nums []int, k int)  {
         return
     }
 
-    arr := make([]int, n)
+    k %= n 
+    count, start := 0, 0
 
-    for i := range arr {
-        newpos := (k + i) % n
-        arr[newpos] = nums[i]
+    for ; count < n; {
+        nextIdx := start
+        temp := nums[start]
+        for {
+            nextIdx = (nextIdx+k) % n
+            temp, nums[nextIdx] = nums[nextIdx], temp
+            count++
+            if start == nextIdx {
+                break
+            }
+        }
+        start++
     }
-    
-    copy(nums, arr)
 }
