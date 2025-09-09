@@ -12,8 +12,9 @@ func jump(nums []int) int {
         if i+nums[i] > farthest {
             farthest = i + nums[i]
         }
+        
 
-        if i == currEnd {
+        if i == currEnd  || farthest >= len-1{
             count++
             currEnd = farthest
 
