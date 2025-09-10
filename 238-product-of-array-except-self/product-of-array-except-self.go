@@ -1,20 +1,20 @@
 func productExceptSelf(nums []int) []int {
-	n := len(nums)
 	answer := make([]int, len(nums))
 	answer[0] = 1
 
 	for i := range answer {
 		if i > 0 {
-			answer[i] = answer[i-1] * nums[i-1]
+			answer[i] = answer[i-1] * nums[i-1] // накапливаем префиксное произведение
 		}
 	}
+    
+    i := len(nums)-2 // т.к. у последнего элемента нет суфиксов
+    sfx := nums[len(nums)-1] // поэтому суффикс накапливать начинаем с посл. элемента
 
-	i := n - 2
-	sufx := nums[n-1]
-	for i >= 0 {
-		answer[i] *= sufx
-		sufx = sufx * nums[i]
-		i--
-	}
-	return answer
+    for i >= 0 {
+        answer[i] *= sfx
+        sfx *= nums[i]
+        i -= 1
+    }
+    return answer
 }
