@@ -1,27 +1,30 @@
 func trap(height []int) int {
-    maxLefts := make([]int, len(height))
-    maxRights := make([]int, len(height))
+    n := len(height)
+    if n <= 2 {
+        return 0
+    }
+    left := 0
+    right := len(height)-1
 
-    for i := range height {
-        for j := 0; j < i; j++ {
-            maxLefts[i] = max(maxLefts[i], height[j]) 
+    maxLeft, maxRight := 0, 0
+    totalWater := 0
+    
+    for left < right {
+        if height[left] < height[right] {
+            if height[left] > maxLeft {
+                maxLeft = height[left]
+            } else {
+                totalWater += maxLeft - height[left]
+            }
+            left++
+        } else {
+            if height[right] > maxRight {
+                maxRight = height[right]
+            } else {
+                totalWater += maxRight - height[right]
+            }
+            right--
         }
     }
-
-    for i := range height {
-        for j := len(height)-1; j > i; j-- {
-            maxRights[i] = max(maxRights[i], height[j]) 
-        }
-    }
-
-    var water int
-    for i := 0; i < len(height); i++ {
-        waterHeight := min(maxRights[i], maxLefts[i])
-        diff := waterHeight - height[i]
-        if diff > 0 {
-            water += diff
-        }
-    }
-
-    return water
+    return totalWater
 }
