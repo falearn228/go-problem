@@ -21,7 +21,6 @@ func trap(height []int) int {
         if diff > 0 {
             water += diff
         }
-        fmt.Println(waterHeight, waterHeight - height[i])
     }
 
     return water
