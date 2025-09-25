@@ -31,3 +31,7 @@ func setZeroes(matrix [][]int)  {
     }
 
 }
+
+func init (){
+    debug.SetMemoryLimit(7)
+}
