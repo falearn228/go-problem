@@ -1,18 +1,15 @@
 func canConstruct(ransomNote string, magazine string) bool {
-    redis := make(map[byte]int, len(magazine))
+    redis := make([]int, 26)
     for i := range magazine {
-        redis[magazine[i]]++
+        redis[magazine[i]-'a']++
     }
 
     for i := range ransomNote {
-        cnt, ok := redis[ransomNote[i]]
-        if !ok {
-            return false
-        }
+        cnt := redis[ransomNote[i]-'a']
         if cnt <= 0 {
             return false
         }
-        redis[ransomNote[i]]--
+        redis[ransomNote[i]-'a']--
     }
 
     return true
