@@ -9,10 +9,10 @@ func canConstruct(ransomNote string, magazine string) bool {
         if !ok {
             return false
         }
-        redis[ransomNote[i]]--
-        if cnt-1 < 0 {
+        if cnt <= 0 {
             return false
         }
+        redis[ransomNote[i]]--
     }
 
     return true
