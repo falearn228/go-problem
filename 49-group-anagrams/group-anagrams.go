@@ -13,8 +13,10 @@ func groupAnagrams(strs []string) [][]string {
     return res
 }
 
-func sortString(str string) string {
-    sptStr := strings.Split(str, "")
-    sort.Strings(sptStr)
-    return strings.Join(sptStr, "")
+func sortString(s string) string {
+    bytes := []byte(s)
+    sort.Slice(bytes, func(i, j int) bool {
+        return bytes[i] < bytes[j]
+    })
+    return string(bytes)
 }
