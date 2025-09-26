@@ -1,22 +1,27 @@
 func groupAnagrams(strs []string) [][]string {
+    if len(strs) == 0 {
+        return [][]string{}
+    }
+
     anagrams := make(map[string][]string)
-    for i := range strs {
-        str := sortString(strs[i])
-        anagrams[str] = append(anagrams[str], strs[i])
+    for _, s := range strs {
+        freq := make([]int, 26)
+        for _ ,ch := range s {
+            freq[ch-'a']++
+        }
+
+        var keyBd strings.Builder
+        for _, count := range freq {
+            keyBd.WriteByte('#')
+            keyBd.WriteString(strconv.Itoa(count))
+        } 
+        key := keyBd.String()
+        anagrams[key] = append(anagrams[key], s)
     }
 
     res := make([][]string, 0, len(anagrams))
-    for i := range anagrams {
-        res = append(res, anagrams[i])
+    for _, group := range anagrams {
+        res = append(res, group)
     }
-
     return res
-}
-
-func sortString(s string) string {
-    bytes := []byte(s)
-    sort.Slice(bytes, func(i, j int) bool {
-        return bytes[i] < bytes[j]
-    })
-    return string(bytes)
 }
