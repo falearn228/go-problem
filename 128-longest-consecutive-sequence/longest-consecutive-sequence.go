@@ -1,35 +1,23 @@
 func longestConsecutive(nums []int) int {
-    if len(nums) == 0 {
-        return 0
-    }
-    indMap := make(map[int]struct{})
+	if len(nums) == 0 {
+		return 0
+	}
 
-    for i := range nums {
-        indMap[nums[i]] = struct{}{}
-    }
+	sort.Ints(nums)
 
-    answer := 0
-    for value := range indMap {
-        if _, found := indMap[value-1]; found {
-            continue
-        }
+	maxCount := 1
+	count := 1
 
-        
-        currNum := value
-        currLen := 1
-
-        for {
-            if _, found := indMap[currNum+1]; found {
-                currLen++
-                currNum++
-            } else {
-                break
-            }
-        }
-        if currLen > answer {
-            answer = currLen
-        }
-
-    }
-    return answer
+	for i := 1; i < len(nums); i++ {
+		if nums[i] == nums[i-1] {
+			continue
+		}
+		if nums[i] == nums[i-1]+1 {
+			count++
+		} else {
+			maxCount = max(maxCount, count)
+			count = 1
+		}
+	}
+	return max(maxCount, count)
 }
