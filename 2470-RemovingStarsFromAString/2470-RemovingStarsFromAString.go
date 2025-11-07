@@ -1,0 +1,14 @@
+// Last updated: 11/7/2025, 2:46:08 PM
+func removeStars(s string) string {
+    stack := make([]byte, 0, len(s))
+
+    for i := range s {
+        if s[i] == '*' && len(stack) > 0 {
+            stack = stack[:len(stack)-1]
+        } else {
+            stack = append(stack, s[i])
+        }
+    }
+
+    return string(stack)
+}
