@@ -13,12 +13,12 @@ func uniquePathsWithObstacles(g [][]int) int {
 
     for i := 0; i < n; i++ {
         for j := 0; j < m; j++ {
-            dp[i][j] = 1
             if g[i][j] == 1 {
                 dp[i][j] = 0
                 continue
             }
             if i == 0 && j == 0 {
+                dp[i][j] = 1
                 continue
             }
             if i == 0 {
